@@ -1,5 +1,6 @@
 # TCN
-I am studying the code about TCN on github (https://github.com/philipperemy/keras-tcn). The number of parameters of the TCN I calculated is different from the answer of the function "model.summary()". The ansewer of the function "model.summary()" is 153500, but I don't know how to calculate this value and I tried trying to calculate the value, but the result is 153000.
+I am studying the code about TCN on github (https://github.com/philipperemy/keras-tcn). The number of parameters of the TCN I calculated is different from the answer of the function "model.summary()". The parameter of TCN layer that calculated by the function "model.summary()" is 153500, but I don't know how to calculate this value and I am trying to calculate the value, but the result is 153000.
+## Code
 ```python
 # design network
 batch_size = None
@@ -29,4 +30,33 @@ model.add(Dense(1))
 model.add(LeakyReLU(alpha=0.3))
 model.compile(loss='mse', optimizer='adam')
 model.summary()
+```
+## Output
+```
+Model: "sequential_2"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+tcn_2 (TCN)                  (None, 100)               153500    
+_________________________________________________________________
+dense_8 (Dense)              (None, 64)                6464      
+_________________________________________________________________
+leaky_re_lu_8 (LeakyReLU)    (None, 64)                0         
+_________________________________________________________________
+dense_9 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+leaky_re_lu_9 (LeakyReLU)    (None, 32)                0         
+_________________________________________________________________
+dense_10 (Dense)             (None, 16)                528       
+_________________________________________________________________
+leaky_re_lu_10 (LeakyReLU)   (None, 16)                0         
+_________________________________________________________________
+dense_11 (Dense)             (None, 1)                 17        
+_________________________________________________________________
+leaky_re_lu_11 (LeakyReLU)   (None, 1)                 0         
+=================================================================
+Total params: 162,589
+Trainable params: 162,589
+Non-trainable params: 0
+_________________________________________________________________
 ```
