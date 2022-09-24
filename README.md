@@ -1,6 +1,11 @@
 # TCN
-I am studying the code about TCN on github (https://github.com/philipperemy/keras-tcn). The number of parameters of the TCN I calculated is different from the answer of the function "model.summary()". The ansewer of the function "model.summary()" is 153500, but I don't know how to calculate this value.
+I am studying the code about TCN on github (https://github.com/philipperemy/keras-tcn). The number of parameters of the TCN I calculated is different from the answer of the function "model.summary()". The ansewer of the function "model.summary()" is 153500, but I don't know how to calculate this value and I tried trying to calculate the value, but the result is 153000.
 ```python
+# design network
+batch_size = None
+model = Sequential()
+input_layer = Input(batch_shape=(batch_size,1,7))
+model.add(input_layer)
 model.add(TCN(nb_filters=100, #Integer. The number of filters to use in the convolutional layers. Would be similar to units for LSTM. Can be a list.
         kernel_size=3, #Integer. The size of the kernel to use in each convolutional layer.
         nb_stacks=1,   #The number of stacks of residual blocks to use.
@@ -14,4 +19,14 @@ model.add(TCN(nb_filters=100, #Integer. The number of filters to use in the conv
         use_batch_norm=False, 
         use_layer_norm=False, 
         ))
+model.add(Dense(64))
+model.add(LeakyReLU(alpha=0.3))
+model.add(Dense(32))
+model.add(LeakyReLU(alpha=0.3))
+model.add(Dense(16))
+model.add(LeakyReLU(alpha=0.3))
+model.add(Dense(1))
+model.add(LeakyReLU(alpha=0.3))
+model.compile(loss='mse', optimizer='adam')
+model.summary()
 ```
